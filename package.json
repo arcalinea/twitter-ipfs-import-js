@@ -9,7 +9,9 @@
     "moment": "^2.22.1",
     "prompt-sync": "^4.1.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "standard": "^11.0.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

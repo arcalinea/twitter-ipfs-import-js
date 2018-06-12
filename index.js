@@ -29,17 +29,24 @@ ipfs.on('start', () => {
       })
   }
   
-  for (var i = 0; i < tweets.length; i++) {
-      t = {
-          type: tweets[i]["type"],
-          created_at: tweets[i]["created_at"],
-          text: tweets[i]["text"]
+  async function asyncPutTweet(){
+      for (var i = 0; i < tweets.length; i++) {
+          t = {
+              type: tweets[i]["type"],
+              created_at: tweets[i]["created_at"],
+              text: tweets[i]["text"]
+          }
+          var cid = await ipfs.dag.put(t, { format: 'dag-cbor', hashAlg: 'sha3-512' })
+          console.log("Putted cid", cid.toBaseEncodedString())
+          // putTweet(t, (err, res) => {
+          //     console.log("Tweet added to ipfs:", res)
+          //     addedTweets.push(res)
+          // })
       }
-      putTweet(t, (err, res) => {
-          console.log("Tweet added to ipfs:", res)
-          addedTweets.push(res)
-      })
   }
+  
+  asyncPutTweet()
+  
  
   setTimeout(function () {
     console.log("Tweets array:", addedTweets)
